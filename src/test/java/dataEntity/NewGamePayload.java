@@ -4,6 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NewGamePayload{
 
+//	public NewGamePayload(int reviewScore, String releaseDate, String name, String rating, int id, String category) {
+//		this.reviewScore = reviewScore;
+//		this.releaseDate = releaseDate;
+//		this.name = name;
+//		this.rating = rating;
+//		this.id = id;
+//		this.category = category;
+//	}
+
 	@JsonProperty("reviewScore")
 	private int reviewScore;
 
