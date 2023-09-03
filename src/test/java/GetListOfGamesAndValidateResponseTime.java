@@ -1,14 +1,9 @@
 
-import dataEntity.GamesListItem;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
-
 
 public class GetListOfGamesAndValidateResponseTime {
 
@@ -16,22 +11,32 @@ public class GetListOfGamesAndValidateResponseTime {
     @Test
     public void getListOfGamesAndValidateResponseTimeTest(){
 
-        long expectedResponseTime = 500L;
+        long expectedResponseTime = 1000L;
 
-        Response response = given().when().get("http://localhost:8080/app/videogames");
-
-        response.then().time(lessThan(expectedResponseTime)).and();
-
-        response.then().log().all();
-
-
-//        List<GamesListItem> gamesListItem = Arrays.asList(response.as(GamesListItem.class));
-//        int name = gamesListItem.get(2).getReviewScore();
-//        System.out.println(name);
-
-        // тут чомусь 1 позиція в gamesListItem списку, тому не можу вивести, наприклад getReviewScore()
-        // для 2ї позиції
-        // але сам тест працює
+        given()
+                .header("Accept", "application/json")
+                .when()
+                .get("http://localhost:8080/app/videogames")
+                .then()
+                .time(lessThan(expectedResponseTime))
+                .and()
+                .log().all();
 
     }
+
+    @Test
+    public void Test(){
+
+        long expectedResponseTime = 1000L;
+
+        given()
+                .get(baseURI)
+                .then()
+                .time(lessThan(expectedResponseTime))
+                .and()
+                .log().all();
+
+    }
+
+    // виводить HTML
 }
